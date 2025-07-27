@@ -4,6 +4,8 @@
 
 |이름|풀이 링크|
 |--|--|
+|river| [link](BOJ_16637/river.java)
+|seorim| [link](BOJ_16637/seorim.py)
 |yoonji| [link](BOJ_16637/yoonji.py)
 ---
 
@@ -12,5 +14,34 @@
 
 |이름|풀이 링크|
 |--|--|
+|river| [link](BOJ_17070/river.java)
+|seorim| [link](BOJ_17070/seorim.py)
 |yoonji| [link](BOJ_17070/yoonji.java)
+---
+
+
+### [BOJ_17135](https://boj.kr/17135) : 캐슬 디펜스
+
+|이름|풀이 링크|
+|--|--|
+|river| [link](BOJ_17135/river.java)
+|seorim| [link](BOJ_17135/seorim.py)
+---
+
+
+### [BOJ_17136](https://boj.kr/17136) : 색종이 붙이기
+
+|이름|풀이 링크|
+|--|--|
+|river| [link](BOJ_17136/river.java)
+|seorim| [link](BOJ_17136/seorim.py)
+---
+
+
+### [BOJ_17281](https://boj.kr/17281) : ⚾
+
+|이름|풀이 링크|
+|--|--|
+|Seorim| [link](BOJ_17281/Seorim.java)
+|river| [link](BOJ_17281/river.java)
 ---
