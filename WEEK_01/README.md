@@ -26,6 +26,7 @@
 |--|--|
 |river| [link](BOJ_17135/river.java)
 |seorim| [link](BOJ_17135/seorim.py)
+|yoonji| [link](BOJ_17135/yoonji.java)
 ---
 
 
@@ -35,6 +36,7 @@
 |--|--|
 |river| [link](BOJ_17136/river.java)
 |seorim| [link](BOJ_17136/seorim.py)
+|yoonji| [link](BOJ_17136/yoonji.java)
 ---
 
 
@@ -44,4 +46,5 @@
 |--|--|
 |Seorim| [link](BOJ_17281/Seorim.java)
 |river| [link](BOJ_17281/river.java)
+|yoonji| [link](BOJ_17281/yoonji.py)
 ---
