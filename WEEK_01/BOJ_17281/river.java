@@ -1,7 +1,7 @@
 import java.io.*;
 import java.util.*;
 
-public class Main {
+public class River {
 	static int N, answer = -1;
 	static boolean[] visited = new boolean[10];
 	static int[] players = new int[10];
