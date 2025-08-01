@@ -1,7 +1,7 @@
 import java.util.*;
 import java.io.*;
 
-public class Solution {
+public class River {
 	static ArrayList<Integer> numList = new ArrayList<>();
 	static ArrayList<Character> opList = new ArrayList<>();
 	static int answer = Integer.MIN_VALUE;

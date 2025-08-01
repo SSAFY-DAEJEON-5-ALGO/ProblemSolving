@@ -1,7 +1,7 @@
 import java.io.*;
 import java.util.*;
 
-public class Main {
+public class River {
 	static int[][] board;
 	static int min = Integer.MAX_VALUE;
 	static int[] papers = {5,5,5,5,5};

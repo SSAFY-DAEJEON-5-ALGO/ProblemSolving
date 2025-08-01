@@ -1,7 +1,7 @@
 import java.io.*;
 import java.util.*;
 
-public class Main {
+public class River {
 	static int N;
 	static int[][] board;
 	public static void main(String[] args) throws IOException {
