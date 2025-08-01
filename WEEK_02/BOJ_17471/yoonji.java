@@ -2,91 +2,12 @@ import java.io.*;
 import java.util.*;
 
 public class Main {
-	static int N, M, K;
-	static int[][] A;
-	static int[][] rotation;	
-	static int result = Integer.MAX_VALUE;
+	static int N;
+	static int min = Integer.MAX_VALUE;
+	static int[] population;
+	static List<Integer>[] graph;	
+	static boolean[] select;
 	
-    static void rotate(int[][] map, int r, int c, int s) {
-    	for (int layer = 1; layer <= s; layer++) {
-    		int top = r - layer;
-    		int left = c - layer;
-    		int right = c + layer;
-    		int bottom = r + layer;
-    		
-    		int prev = map[top][left];
-    		
-    		// <- direction
-    		for (int j = left + 1; j <= right; j++) {
-    			int temp = map[top][j];
-    			map[top][j] = prev;
-    			prev = temp;
-    		}
-    		
-    		// 위에서 아래
-    		for (int i = top + 1; i <= bottom; i++) {
-    			int temp = map[i][right];
-    			map[i][right] = prev;
-    			prev = temp;
-    		}
-    		
-    		// ->
-    		for (int j = right - 1; j >= left; j--) {
-    			int temp = map[bottom][j];
-    			map[bottom][j] = prev;
-    			prev = temp;
-    		}
-    		
-    		// 아래에서 위
-    		for (int i = bottom - 1; i >= top; i--) {
-    			int temp = map[i][left];
-    			map[i][left] = prev;
-    			prev = temp;
-    		}
-    	}
-    }
-    
-    static int getRowSumMin(int[][] map) {
-    	int min = Integer.MAX_VALUE;
-    	for (int i = 0; i < map.length; i++) {
-    		int sum = 0;
-    		for (int j = 0; j < map[0].length; j++) {
-    			sum += map[i][j];
-    		}
-    		min = Math.min(min, sum);
-    	}
-    	return min;
-    }
-
-	static void permute(List<Integer> order, boolean[] visited) {
-	    if (order.size() == K) {
-	        int[][] copied = copyMap(A);
-	        for (int idx : order) {
-	            int[] rot = rotation[idx];
-	            rotate(copied, rot[0] - 1, rot[1] - 1, rot[2]);
-	        }
-	        result = Math.min(result, getRowSumMin(copied));
-	        return;
-	    }
-
-	    for (int i = 0; i < K; i++) {
-	        if (!visited[i]) {
-	            visited[i] = true;
-	            order.add(i);
-	            permute(order, visited);
-	            order.remove(order.size() - 1);
-	            visited[i] = false;
-	        }
-	    }
-	}
-	
-	static int[][] copyMap(int[][] map) {
-	    int[][] newMap = new int[map.length][map[0].length];
-	    for (int i = 0; i < map.length; i++) {
-	        newMap[i] = map[i].clone(); 
-	    }
-	    return newMap;
-	}
 	
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -94,30 +15,94 @@ public class Main {
         
         st = new StringTokenizer(br.readLine());
         N = Integer.parseInt(st.nextToken());
-        M = Integer.parseInt(st.nextToken());
-        K = Integer.parseInt(st.nextToken());
+        population = new int[N + 1];
+        graph = new ArrayList[N + 1];
+        select = new boolean[N + 1];
         
-        A = new int[N][M];
-        for (int i = 0; i < N; i++) {
+        // 인구 수
+        st = new StringTokenizer(br.readLine());
+        for (int i = 1; i <= N; i++) {
+        	population[i] = Integer.parseInt(st.nextToken());
+        	graph[i] = new ArrayList<>();
+        }
+        
+        // 인접 정보
+        for (int i = 1; i <= N; i++) {
         	st = new StringTokenizer(br.readLine());
-        	for (int j = 0; j < M; j++) {
-        		A[i][j] = Integer.parseInt(st.nextToken());
+        	int cnt = Integer.parseInt(st.nextToken());
+        	for (int j = 0; j < cnt; j++) {
+        		int to = Integer.parseInt(st.nextToken());
+        		graph[i].add(to);
         	}
         }
         
-        rotation = new int[K][3];
-        for (int i = 0; i < K; i++) {
-        	st = new StringTokenizer(br.readLine());
-        	rotation[i][0] = Integer.parseInt(st.nextToken());
-        	rotation[i][1] = Integer.parseInt(st.nextToken());
-        	rotation[i][2] = Integer.parseInt(st.nextToken());
-        }
+        powerset(1);
         
-        boolean[] visited = new boolean[K];
-        List<Integer> order = new ArrayList<>();
-        permute(order, visited);
-        
-        System.out.println(result);
+        System.out.println(min == Integer.MAX_VALUE ? -1 : min);
 
+    }
+    
+    static void powerset(int idx) {
+    	if (idx == N + 1) {
+    		boolean hasA = false, hasB = false;
+    		for (int i = 1; i <= N; i++) {
+    			if (select[i]) hasA = true;
+    			else hasB = true;
+    		}
+    		if (!hasA || !hasB) return;
+    		
+    		if (isConnected(true) && isConnected(false)) {
+    			int sumA = 0, sumB = 0;
+    			for (int i = 1; i <= N; i++) {
+    				if (select[i]) sumA += population[i];
+    				else sumB += population[i];
+    			}
+    			min = Math.min(min, Math.abs(sumA - sumB));
+    		}
+    		return;
+    	}
+    	
+    	select[idx] = true;
+    	powerset(idx + 1);
+    	
+    	select[idx] = false;
+    	powerset(idx + 1);
+    }
+    
+    static boolean isConnected(boolean target) {
+    	boolean[] visited = new boolean[N + 1];
+    	Queue<Integer> q = new LinkedList<>();
+    	int start = -1;
+    	
+    	for (int i = 1; i <= N; i++) {
+    		if (select[i] == target) {
+    			start = i;
+    			break;
+    		}
+    	}
+    	
+    	if (start == -1) return false;
+    	
+    	q.offer(start);
+    	visited[start] = true;
+    	int count = 1;
+    	
+    	while (!q.isEmpty()) {
+    		int current = q.poll();
+    		for (int next : graph[current]) {
+    			if (!visited[next] && select[next] == target) {
+    				visited[next] = true;
+    				q.offer(next);
+    				count++;
+    			}
+    		}
+    	}
+    	
+    	int total = 0;
+    	for (int i = 1; i <= N; i++) {
+    		if (select[i] == target) total++;
+    	}
+    	
+    	return count == total;
     }
 }
