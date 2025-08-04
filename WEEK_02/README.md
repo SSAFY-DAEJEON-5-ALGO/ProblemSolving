@@ -13,6 +13,7 @@
 
 |이름|풀이 링크|
 |--|--|
+|River| [link](BOJ_17471/River.java)
 |seorim| [link](BOJ_17471/seorim.py)
 |yoonji| [link](BOJ_17471/yoonji.java)
 ---
@@ -22,6 +23,7 @@
 
 |이름|풀이 링크|
 |--|--|
+|River| [link](BOJ_17472/River.java)
 |seorim| [link](BOJ_17472/seorim.py)
 |yoonji| [link](BOJ_17472/yoonji.java)
 ---
@@ -31,6 +33,7 @@
 
 |이름|풀이 링크|
 |--|--|
+|River| [link](BOJ_3954/River.java)
 |seorim| [link](BOJ_3954/seorim.py)
 |yoonji| [link](BOJ_3954/yoonji.java)
 ---
