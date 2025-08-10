@@ -4,6 +4,7 @@
 
 |이름|풀이 링크|
 |--|--|
+|River| [link](BOJ_17406/River.java)
 |seorim| [link](BOJ_17406/seorim.py)
 |yoonji| [link](BOJ_17406/yoonji.java)
 ---
