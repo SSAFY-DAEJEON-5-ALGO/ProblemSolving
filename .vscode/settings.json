@@ -1,6 +1,0 @@
-{
-    "indentRainbow.excludedLanguages": [
-        "python"
-    ],
-    "code-runner.runInTerminal": true,
-}
