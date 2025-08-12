@@ -1,3 +1,4 @@
+// SWEA_1248 공통조상
 import java.util.*;
 
 public class Solution {
@@ -51,16 +52,9 @@ public class Solution {
 		}
 		
 		static int getSubtreeSize(int root) {
-			int count = 0;
-			Stack<Integer> stack = new Stack<>();
-			stack.push(root); // 시작 노드(root)부터 스택에 넣기
-			
-			while (!stack.isEmpty()) {
-				int cur = stack.pop();
-				count++;
-				for (int next : child[cur]) { // 현재 노드의 자식 노드들을 스택에 추가
-					stack.push(next);
-				}
+			int count = 1;
+			for (int next : child[root]) {
+				count += getSubtreeSize(next);
 			}
 			return count;
 		}
