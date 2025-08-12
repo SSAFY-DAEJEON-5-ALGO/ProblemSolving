@@ -1,6 +1,0 @@
-{
-    "errorLens.enabled": false,
-    "indentRainbow.excludedLanguages": [
-        "python"
-    ]
-}
