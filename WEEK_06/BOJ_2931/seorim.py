@@ -21,7 +21,6 @@ direction = {
 
 queue = deque()
 visited = [[False] * m for _ in range(n)]
-x, y = -1, -1
 for i in range(n):
     for j in range(m):
         if europe[i][j] == 'M':
@@ -46,7 +45,7 @@ def get_block_type(bx, by):
         if near_block == '.':
             continue
         elif near_block in ['M', 'Z']:
-            if has_near_block(nx, ny):
+            if not has_near_block(nx, ny):
                 connect.append((dx, dy))
         else:
             if near_dir in direction[near_block]:
@@ -66,19 +65,9 @@ def has_near_block(x, y):
             continue
         
         if europe[nx][ny] != '.':
-            return False
+            return True
         
-    return True
-
-for dx, dy in direction['+']:
-    nx, ny = x + dx, y + dy
-    
-    if nx < 0 or nx >= n or ny < 0 or ny >= m:
-        continue
-    
-    if europe[nx][ny] != '.':
-        queue.append((nx, ny))
-        visited[nx][ny] = True
+    return False
 
 while queue:
     x, y = queue.popleft()
