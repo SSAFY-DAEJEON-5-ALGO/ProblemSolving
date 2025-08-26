@@ -6,8 +6,8 @@ public class Main {
 	private static int R;
 	private static int C;
 	// 상 하 좌 우
-	private static int dx[] = { -1, 1, 0, 0 };
-	private static int dy[] = { 0, 0, -1, 1 };
+	private static int dr[] = {-1, 1, 0, 0};
+	private static int dc[] = {0, 0, -1, 1};
 	private static Map<Character, Integer> idx; // 블록과 pipes의 인덱스를 연결하기 위한 map
 	
 	static boolean[][] pipes = { 
@@ -29,30 +29,30 @@ public class Main {
 		initIdx();
 
 		for (int i = 0; i < R; i++) {
-			String t = br.readLine();
+			String line = br.readLine();
 			for (int j = 0; j < C; j++) {
-				map[i][j] = t.charAt(j);
+				map[i][j] = line.charAt(j);
 			}
 		}
-		for (int i = 0; i < R; i++) {
-			for (int j = 0; j < C; j++) {
-				if (map[i][j] == '.') { // . 인 경우
+		for (int r = 0; r < R; r++) {
+			for (int c = 0; c < C; c++) {
+				if (map[r][c] == '.') { // . 인 경우
 					boolean[] ndir = new boolean[4];
 					int cnt = 0;
-					for (int k = 0; k < 4; k++) { // 4방향 탐색
-						int nx = i + dx[k];
-						int ny = j + dy[k];
-						if (nx > -1 && ny > -1 && nx < R && ny < C && map[nx][ny] != '.' && map[nx][ny] != 'Z'
-								&& map[nx][ny] != 'M' && pipes[idx.get(map[nx][ny])][getOpp(k)]) { // 해당 방향의 블록과 연결 시
+					for (int d = 0; d < 4; d++) { // 4방향 탐색
+						int nr = r + dr[d];
+						int nc = c + dc[d];
+						if (nr > -1 && nc > -1 && nr < R && nc < C && map[nr][nc] != '.' && map[nr][nc] != 'Z'
+								&& map[nr][nc] != 'M' && pipes[idx.get(map[nr][nc])][getOpp(d)]) { // 해당 방향의 블록과 연결 시
 							cnt++;
-							ndir[k] = true;
+							ndir[d] = true;
 						}
 					}
 					if (cnt == 4) { // 4방향 다 연결이면 +블록
-						System.out.println((i + 1) + " " + (j + 1) + " +");
+						System.out.println((r + 1) + " " + (c + 1) + " +");
 						return;
 					} else if (cnt == 2) { // 2개 연결 시 
-						printResult(i + 1, j + 1, ndir);
+						printResult(r + 1, c + 1, ndir);
 						return;
 					}
 				}
@@ -73,13 +73,13 @@ public class Main {
 				}
 			}
 			if (flag) {
-				System.out.println(r + " " + c + " " + Origin(i));
+				System.out.println(r + " " + c + " " + origin(i));
 			}
 		}
 
 	}
 
-	private static char Origin(int i) {
+	private static char origin(int i) {
 		// map을 다시 블록으로 변환
 		switch (i) {
 		case 0:
@@ -125,4 +125,3 @@ public class Main {
 		idx.put('4', 6);
 	}
 }
-
