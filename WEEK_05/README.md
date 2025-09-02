@@ -4,6 +4,7 @@
 
 |이름|풀이 링크|
 |--|--|
+|seorim| [link](BOJ_16235/seorim.py)
 |yoonji| [link](BOJ_16235/yoonji.java)
 ---
 
@@ -12,6 +13,7 @@
 
 |이름|풀이 링크|
 |--|--|
+|seorim| [link](BOJ_17822/seorim.py)
 |yoonji| [link](BOJ_17822/yoonji.java)
 ---
 
@@ -20,5 +22,6 @@
 
 |이름|풀이 링크|
 |--|--|
+|seorim| [link](BOJ_2661/seorim.py)
 |yoonji| [link](BOJ_2661/yoonji.java)
 ---
