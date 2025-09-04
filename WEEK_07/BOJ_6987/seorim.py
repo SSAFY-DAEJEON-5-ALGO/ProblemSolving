@@ -6,15 +6,14 @@ input = sys.stdin.readline
 for _ in range(4):
     data = list(map(int, input().split()))
     result = [data[i*3:i*3+3] for i in range(6)]
-    result.sort(key=lambda x: (-x[0], -x[1], -x[2]))
     
-    def pre():
+    def is_all_five_matches():
         for team in range(6):
             if sum(result[team]) != 5:
                 return False
         return True
     
-    if not pre():
+    if not is_all_five_matches():
         print(0, end=' ')
         continue
     
@@ -35,32 +34,13 @@ for _ in range(4):
         
         a, b = games[depth]
         
-        # team_a win
-        if flag == 0:
-            if status[a][0] < result[a][0] and status[b][2] < result[b][2]:
-                status[a][0] += 1
-                status[b][2] += 1
+        for ra, rb in [(0, 2), (1, 1), (2, 0)]:  # A win, draw, B win
+            if flag == 0 and (status[a][ra] < result[a][ra] and status[b][rb] < result[b][rb]):
+                status[a][ra] += 1
+                status[b][rb] += 1
                 bt(depth+1)
-                status[a][0] -= 1
-                status[b][2] -= 1
+                status[a][ra] -= 1
+                status[b][rb] -= 1
         
-        # draw
-        if flag == 0:
-            if status[a][1] < result[a][1] and status[b][1] < result[b][1]:
-                status[a][1] += 1
-                status[b][1] += 1
-                bt(depth+1)
-                status[a][1] -= 1
-                status[b][1] -= 1
-        
-        # team_b win
-        if flag == 0:
-            if status[a][2] < result[a][2] and status[b][2] < result[b][2]:
-                status[a][2] += 1
-                status[b][0] += 1
-                bt(depth+1)
-                status[a][2] -= 1
-                status[b][0] -= 1
-            
     bt(0)
     print(flag, end=' ')
