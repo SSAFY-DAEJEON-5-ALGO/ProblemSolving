@@ -11,18 +11,9 @@ class Direction():
         4: [[0, 1, 3], [0, 2, 3], [1, 2, 3], [0, 1, 2]],
         5: [[0, 1, 2, 3]]
     }
-    rotate_info = [0] * 6
     
-    def rotate(self, num):
-        curr_r = self.rotate_info[num]
-        next_r = 0
-        if num in [1, 3, 4]:
-            next_r = (self.rotate_info[num] + 1) % 4
-        elif num == 2:
-            next_r = (self.rotate_info[num] + 1) % 2
-        
-        self.rotate_info[num] = next_r
-        return self._convert(self.direction[num][curr_r])
+    def get_dir(self, cctv, r):
+        return self._convert(self.direction[cctv][r])
     
     def num_of_case(self, num):
         if num in [1, 3, 4]:
@@ -57,9 +48,9 @@ def bt(status, idx):
     
     x, y = cctv[idx]
     curr = status[x][y]
-    for _ in range(dirt.num_of_case(curr)):
+    for r in range(dirt.num_of_case(curr)):
         new_room = deepcopy(status)
-        for dx, dy in dirt.rotate(curr):
+        for dx, dy in dirt.get_dir(curr, r):
             p = 1
             nx, ny = x + dx*p, y + dy*p
             while 0 <= nx and nx < n and 0 <= ny and ny < m:
