@@ -48,11 +48,3 @@
 |river| [link](BOJ_17281/river.java)
 |yoonji| [link](BOJ_17281/yoonji.py)
 ---
-
-
-### [BOJ_17406](https://boj.kr/17406) : 배열 돌리기 4
-
-|이름|풀이 링크|
-|--|--|
-|River| [link](BOJ_17406/River.java)
----
