@@ -1,7 +1,7 @@
 import java.util.*;
 import java.io.*;
 
-public class Main {
+public class yoonji {
 	static int N, M;
 	static int[][] map;
 	static int[] dr = {-1, 1, 0, 0};
