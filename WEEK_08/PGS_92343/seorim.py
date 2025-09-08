@@ -20,7 +20,8 @@ def solution(info, edges):
         answer = max(answer, animal[0])
         
         for nxt in graph[root]:
-            can_go_nodes[nxt] = True
+            if not visited[nxt]:
+                can_go_nodes[nxt] = True
         
         for nxt in range(n):
             if can_go_nodes[nxt] and not visited[nxt]:
