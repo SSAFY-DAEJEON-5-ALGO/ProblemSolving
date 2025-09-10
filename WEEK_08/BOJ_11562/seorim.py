@@ -8,10 +8,7 @@ dist = [[inf] * n for _ in range(n)]
 for _ in range(m):
     u, v, b = map(int, input().split())
     dist[u-1][v-1] = 0
-    if b == 1:
-        dist[v-1][u-1] = 0
-    else:
-        dist[v-1][u-1] = 1
+    dist[v-1][u-1] = 1-b
 
 for i in range(n):
     for a in range(n):
