@@ -9,18 +9,19 @@ import java.util.Set;
 public class Seorim {
 
     static int n;
-    static int ans;
+
     static Map<Integer, Integer> cache = new HashMap<>();
+    static Set<Integer> nextNums;
+    static boolean[] isTouch;
 
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         int T = Integer.parseInt(br.readLine());
         for (int tc = 1; tc <= T; tc++) {
             n = Integer.parseInt(br.readLine());
-            ans = -1;
-
             System.out.println("#" + tc + " " + solve(n));
         }
+        System.out.println();
     }
 
     static int solve(int num) {
@@ -32,54 +33,50 @@ public class Seorim {
             return cache.get(num);
         }
 
-        int k = String.valueOf(num).length();
-        Set<Integer> nextNums = new HashSet<>();
-        boolean[] touch = new boolean[k];
-        split(1, k, num, nextNums, touch);
+        int between = String.valueOf(num).length() - 1;
+        nextNums = new HashSet<>();
+        isTouch = new boolean[between];
+        split(0, between, num);
 
         int ret = -1;
         for (int next: nextNums) {
             ret = Math.max(ret, solve(next) + 1);
         }
 
-        cache.putIfAbsent(num, ret);
+        cache.put(num, ret);
         return ret;
     }
 
-    static void split(int idx, int k, int num, Set<Integer> set, boolean[] touch) {
-        if (idx == k) {
-            if (!allFalse(touch)) {
-                int mul = 1;
-                int div = 1;
-                for (int i = 1; i < k; i++) {
+    static void split(int idx, int between, int num) {
+        if (idx == between) {
+            if (anyTrue(isTouch)) {
+                int mul = 1, div = 1;
+                for (boolean touched: isTouch) {
                     div *= 10;
-                    if (touch[i]) {
+                    if (touched) {
                         mul *= num % div;
                         num /= div;
                         div = 1;
                     }
                 }
                 mul *= num;
-                set.add(mul);
+                nextNums.add(mul);
             }
 
             return;
         }
 
-        touch[idx] = true;
-        split(idx + 1, k, num, set, touch);
-        touch[idx] = false;
-        split(idx + 1, k, num, set, touch);
+        isTouch[idx] = true;
+        split(idx + 1, between, num);
+        isTouch[idx] = false;
+        split(idx + 1, between, num);
     }
 
-    static boolean allFalse(boolean[] arr) {
-        for (int i = 1; i < arr.length; i++) {
-            if (arr[i]) {
-                return false;
-            }
+    static boolean anyTrue(boolean[] arr) {
+        for (boolean b : arr) {
+            if (b) return true;
         }
-
-        return true;
+        return false;
     }
 
 }
