@@ -5,6 +5,7 @@
 |이름|풀이 링크|
 |--|--|
 |River| [link](BOJ_1194/River.java)
+|yoonji| [link](BOJ_1194/yoonji.java)
 ---
 
 
@@ -13,6 +14,7 @@
 |이름|풀이 링크|
 |--|--|
 |River| [link](BOJ_17142/River.java)
+|yoonji| [link](BOJ_17142/yoonji.java)
 ---
 
 
@@ -21,4 +23,5 @@
 |이름|풀이 링크|
 |--|--|
 |River| [link](BOJ_2174/River.java)
+|yoonji| [link](BOJ_2174/yoonji.java)
 ---
